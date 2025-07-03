@@ -3,7 +3,7 @@
 
 // Generated Code. DO NOT EDIT.
 
-package wconfig
+package sconfig
 
 const (
 	ConfigKey_AppClear                       = "app:*"

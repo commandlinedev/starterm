@@ -11,9 +11,9 @@ import (
 
 	"github.com/commandlinedev/starterm/pkg/eventbus"
 	"github.com/commandlinedev/starterm/pkg/panichandler"
+	"github.com/commandlinedev/starterm/pkg/score"
 	"github.com/commandlinedev/starterm/pkg/starobj"
 	"github.com/commandlinedev/starterm/pkg/tsgen/tsgenmeta"
-	"github.com/commandlinedev/starterm/pkg/wcore"
 	"github.com/commandlinedev/starterm/pkg/wps"
 	"github.com/commandlinedev/starterm/pkg/wstore"
 )
@@ -45,7 +45,7 @@ func (svc *WindowService) CreateWindow_Meta() tsgenmeta.MethodMeta {
 }
 
 func (svc *WindowService) CreateWindow(ctx context.Context, winSize *starobj.WinSize, workspaceId string) (*starobj.Window, error) {
-	window, err := wcore.CreateWindow(ctx, winSize, workspaceId)
+	window, err := score.CreateWindow(ctx, winSize, workspaceId)
 	if err != nil {
 		return nil, fmt.Errorf("error creating window: %w", err)
 	}
@@ -107,11 +107,11 @@ func (svc *WindowService) MoveBlockToNewWindow(ctx context.Context, currentTabId
 	if !foundBlock {
 		return nil, fmt.Errorf("block not found in current tab")
 	}
-	newWindow, err := wcore.CreateWindow(ctx, nil, "")
+	newWindow, err := score.CreateWindow(ctx, nil, "")
 	if err != nil {
 		return nil, fmt.Errorf("error creating window: %w", err)
 	}
-	ws, err := wcore.GetWorkspace(ctx, newWindow.WorkspaceId)
+	ws, err := score.GetWorkspace(ctx, newWindow.WorkspaceId)
 	if err != nil {
 		return nil, fmt.Errorf("error getting workspace: %w", err)
 	}
@@ -127,12 +127,12 @@ func (svc *WindowService) MoveBlockToNewWindow(ctx context.Context, currentTabId
 	if !windowCreated {
 		return nil, fmt.Errorf("new window not created")
 	}
-	wcore.QueueLayoutActionForTab(ctx, currentTabId, starobj.LayoutActionData{
-		ActionType: wcore.LayoutActionDataType_Remove,
+	score.QueueLayoutActionForTab(ctx, currentTabId, starobj.LayoutActionData{
+		ActionType: score.LayoutActionDataType_Remove,
 		BlockId:    blockId,
 	})
-	wcore.QueueLayoutActionForTab(ctx, ws.ActiveTabId, starobj.LayoutActionData{
-		ActionType: wcore.LayoutActionDataType_Insert,
+	score.QueueLayoutActionForTab(ctx, ws.ActiveTabId, starobj.LayoutActionData{
+		ActionType: score.LayoutActionDataType_Insert,
 		BlockId:    blockId,
 		Focused:    true,
 	})
@@ -147,7 +147,7 @@ func (svc *WindowService) SwitchWorkspace_Meta() tsgenmeta.MethodMeta {
 
 func (svc *WindowService) SwitchWorkspace(ctx context.Context, windowId string, workspaceId string) (*starobj.Workspace, error) {
 	ctx = starobj.ContextWithUpdates(ctx)
-	ws, err := wcore.SwitchWorkspace(ctx, windowId, workspaceId)
+	ws, err := score.SwitchWorkspace(ctx, windowId, workspaceId)
 
 	updates := starobj.ContextGetUpdatesRtn(ctx)
 	go func() {
@@ -167,5 +167,5 @@ func (svc *WindowService) CloseWindow_Meta() tsgenmeta.MethodMeta {
 
 func (svc *WindowService) CloseWindow(ctx context.Context, windowId string, fromElectron bool) error {
 	ctx = starobj.ContextWithUpdates(ctx)
-	return wcore.CloseWindow(ctx, windowId, fromElectron)
+	return score.CloseWindow(ctx, windowId, fromElectron)
 }

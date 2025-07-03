@@ -13,11 +13,11 @@ import (
 	"reflect"
 
 	"github.com/commandlinedev/starterm/pkg/ijson"
+	"github.com/commandlinedev/starterm/pkg/sconfig"
 	"github.com/commandlinedev/starterm/pkg/starobj"
 	"github.com/commandlinedev/starterm/pkg/telemetry/telemetrydata"
 	"github.com/commandlinedev/starterm/pkg/util/iochan/iochantypes"
 	"github.com/commandlinedev/starterm/pkg/vdom"
-	"github.com/commandlinedev/starterm/pkg/wconfig"
 	"github.com/commandlinedev/starterm/pkg/wps"
 )
 
@@ -194,7 +194,7 @@ type WshRpcInterface interface {
 	TestCommand(ctx context.Context, data string) error
 	SetConfigCommand(ctx context.Context, data MetaSettingsType) error
 	SetConnectionsConfigCommand(ctx context.Context, data ConnConfigRequest) error
-	GetFullConfigCommand(ctx context.Context) (wconfig.FullConfigType, error)
+	GetFullConfigCommand(ctx context.Context) (sconfig.FullConfigType, error)
 	BlockInfoCommand(ctx context.Context, blockId string) (*BlockInfoData, error)
 	StarInfoCommand(ctx context.Context) (*StarInfoData, error)
 	WshActivityCommand(ct context.Context, data map[string]int) error
@@ -567,7 +567,7 @@ type CommandRemoteListEntriesRtnData struct {
 
 type ConnRequest struct {
 	Host       string               `json:"host"`
-	Keywords   wconfig.ConnKeywords `json:"keywords,omitempty"`
+	Keywords   sconfig.ConnKeywords `json:"keywords,omitempty"`
 	LogBlockId string               `json:"logblockid,omitempty"`
 }
 

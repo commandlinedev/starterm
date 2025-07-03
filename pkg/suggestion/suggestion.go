@@ -15,10 +15,10 @@ import (
 	"strings"
 
 	"github.com/commandlinedev/starterm/pkg/faviconcache"
+	"github.com/commandlinedev/starterm/pkg/sconfig"
 	"github.com/commandlinedev/starterm/pkg/starbase"
 	"github.com/commandlinedev/starterm/pkg/util/fileutil"
 	"github.com/commandlinedev/starterm/pkg/util/utilfn"
-	"github.com/commandlinedev/starterm/pkg/wconfig"
 	"github.com/commandlinedev/starterm/pkg/wshrpc"
 	"github.com/junegunn/fzf/src/algo"
 	"github.com/junegunn/fzf/src/util"
@@ -146,8 +146,8 @@ func FetchSuggestions(ctx context.Context, data wshrpc.FetchSuggestionsData) (*w
 	return nil, fmt.Errorf("unsupported suggestion type: %q", data.SuggestionType)
 }
 
-func filterBookmarksForValid(bookmarks map[string]wconfig.WebBookmark) map[string]wconfig.WebBookmark {
-	validBookmarks := make(map[string]wconfig.WebBookmark)
+func filterBookmarksForValid(bookmarks map[string]sconfig.WebBookmark) map[string]sconfig.WebBookmark {
+	validBookmarks := make(map[string]sconfig.WebBookmark)
 	for k, v := range bookmarks {
 		if v.Url == "" {
 			continue
@@ -171,14 +171,14 @@ func fetchBookmarkSuggestions(_ context.Context, data wshrpc.FetchSuggestionsDat
 	// field that will be used for display, the positions for the secondary field (if any),
 	// and its original index in the Bookmarks list.
 	type scoredEntry struct {
-		bookmark    wconfig.WebBookmark
+		bookmark    sconfig.WebBookmark
 		score       int
 		matchPos    []int // positions for the field that's used as Display
 		subMatchPos []int // positions for the other field (if any)
 		origIndex   int
 	}
 
-	bookmarks := wconfig.GetWatcher().GetFullConfig().Bookmarks
+	bookmarks := sconfig.GetWatcher().GetFullConfig().Bookmarks
 	bookmarks = filterBookmarksForValid(bookmarks)
 
 	searchTerm := data.Query

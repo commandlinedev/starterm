@@ -9,9 +9,9 @@ import (
 	"strings"
 	"time"
 
+	"github.com/commandlinedev/starterm/pkg/score"
 	"github.com/commandlinedev/starterm/pkg/starobj"
 	"github.com/commandlinedev/starterm/pkg/tsgen/tsgenmeta"
-	"github.com/commandlinedev/starterm/pkg/wcore"
 	"github.com/commandlinedev/starterm/pkg/wps"
 	"github.com/commandlinedev/starterm/pkg/wstore"
 )
@@ -104,7 +104,7 @@ func (svc *ObjectService) CreateBlock(uiContext starobj.UIContext, blockDef *sta
 	defer cancelFn()
 	ctx = starobj.ContextWithUpdates(ctx)
 
-	blockData, err := wcore.CreateBlock(ctx, uiContext.ActiveTabId, blockDef, rtOpts)
+	blockData, err := score.CreateBlock(ctx, uiContext.ActiveTabId, blockDef, rtOpts)
 	if err != nil {
 		return "", nil, err
 	}
@@ -122,7 +122,7 @@ func (svc *ObjectService) DeleteBlock(uiContext starobj.UIContext, blockId strin
 	ctx, cancelFn := context.WithTimeout(context.Background(), DefaultTimeout)
 	defer cancelFn()
 	ctx = starobj.ContextWithUpdates(ctx)
-	err := wcore.DeleteBlock(ctx, blockId, true)
+	err := score.DeleteBlock(ctx, blockId, true)
 	if err != nil {
 		return nil, fmt.Errorf("error deleting block: %w", err)
 	}

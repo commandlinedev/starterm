@@ -1,7 +1,7 @@
 // Copyright 2025, Command Line Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-package wconfig
+package sconfig
 
 import (
 	"bytes"
@@ -15,10 +15,10 @@ import (
 	"sort"
 	"strings"
 
+	"github.com/commandlinedev/starterm/pkg/sconfig/defaultconfig"
 	"github.com/commandlinedev/starterm/pkg/starbase"
 	"github.com/commandlinedev/starterm/pkg/starobj"
 	"github.com/commandlinedev/starterm/pkg/util/utilfn"
-	"github.com/commandlinedev/starterm/pkg/wconfig/defaultconfig"
 )
 
 const SettingsFile = "settings.json"
@@ -382,8 +382,8 @@ func readConfigPart(partName string, simpleMerge bool) (starobj.MetaMapType, []C
 	return mergeMetaMap(rtn, homeConfigs, simpleMerge), allErrs
 }
 
-// this function should only be called by the wconfig code.
-// in golang code, the best way to get the current config is via the watcher -- wconfig.GetWatcher().GetFullConfig()
+// this function should only be called by the sconfig code.
+// in golang code, the best way to get the current config is via the watcher -- sconfig.GetWatcher().GetFullConfig()
 func ReadFullConfig() FullConfigType {
 	var fullConfig FullConfigType
 	configRType := reflect.TypeOf(fullConfig)

@@ -10,10 +10,10 @@ import (
 	"time"
 
 	"github.com/commandlinedev/starterm/pkg/remote/conncontroller"
+	"github.com/commandlinedev/starterm/pkg/sconfig"
+	"github.com/commandlinedev/starterm/pkg/score"
 	"github.com/commandlinedev/starterm/pkg/starobj"
 	"github.com/commandlinedev/starterm/pkg/wcloud"
-	"github.com/commandlinedev/starterm/pkg/wconfig"
-	"github.com/commandlinedev/starterm/pkg/wcore"
 	"github.com/commandlinedev/starterm/pkg/wshrpc"
 	"github.com/commandlinedev/starterm/pkg/wslconn"
 	"github.com/commandlinedev/starterm/pkg/wstore"
@@ -27,7 +27,7 @@ func (cs *ClientService) GetClientData() (*starobj.Client, error) {
 	log.Println("GetClientData")
 	ctx, cancelFn := context.WithTimeout(context.Background(), DefaultTimeout)
 	defer cancelFn()
-	return wcore.GetClientData(ctx)
+	return score.GetClientData(ctx)
 }
 
 func (cs *ClientService) GetTab(tabId string) (*starobj.Tab, error) {
@@ -48,7 +48,7 @@ func (cs *ClientService) GetAllConnStatus(ctx context.Context) ([]wshrpc.ConnSta
 
 // moves the window to the front of the windowId stack
 func (cs *ClientService) FocusWindow(ctx context.Context, windowId string) error {
-	return wcore.FocusWindow(ctx, windowId)
+	return score.FocusWindow(ctx, windowId)
 }
 
 func (cs *ClientService) AgreeTos(ctx context.Context) (starobj.UpdatesRtnType, error) {
@@ -63,7 +63,7 @@ func (cs *ClientService) AgreeTos(ctx context.Context) (starobj.UpdatesRtnType, 
 	if err != nil {
 		return nil, fmt.Errorf("error updating client data: %w", err)
 	}
-	wcore.BootstrapStarterLayout(ctx)
+	score.BootstrapStarterLayout(ctx)
 	return starobj.ContextGetUpdatesRtn(ctx), nil
 }
 
@@ -88,9 +88,9 @@ func sendNoTelemetryUpdate(telemetryEnabled bool) {
 
 func (cs *ClientService) TelemetryUpdate(ctx context.Context, telemetryEnabled bool) error {
 	meta := starobj.MetaMapType{
-		wconfig.ConfigKey_TelemetryEnabled: telemetryEnabled,
+		sconfig.ConfigKey_TelemetryEnabled: telemetryEnabled,
 	}
-	err := wconfig.SetBaseConfigValue(meta)
+	err := sconfig.SetBaseConfigValue(meta)
 	if err != nil {
 		return fmt.Errorf("error setting telemetry value: %w", err)
 	}

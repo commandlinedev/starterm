@@ -22,6 +22,7 @@ import (
 	"github.com/commandlinedev/starterm/pkg/panichandler"
 	"github.com/commandlinedev/starterm/pkg/remote"
 	"github.com/commandlinedev/starterm/pkg/remote/conncontroller"
+	"github.com/commandlinedev/starterm/pkg/sconfig"
 	"github.com/commandlinedev/starterm/pkg/shellexec"
 	"github.com/commandlinedev/starterm/pkg/starbase"
 	"github.com/commandlinedev/starterm/pkg/starobj"
@@ -29,7 +30,6 @@ import (
 	"github.com/commandlinedev/starterm/pkg/util/fileutil"
 	"github.com/commandlinedev/starterm/pkg/util/shellutil"
 	"github.com/commandlinedev/starterm/pkg/util/utilfn"
-	"github.com/commandlinedev/starterm/pkg/wconfig"
 	"github.com/commandlinedev/starterm/pkg/wps"
 	"github.com/commandlinedev/starterm/pkg/wshrpc"
 	"github.com/commandlinedev/starterm/pkg/wshrpc/wshclient"
@@ -283,7 +283,7 @@ func getCustomInitScriptValue(meta starobj.MetaMapType, connName string, shellTy
 			return meta.GetString(key, ""), "blockmeta/" + key
 		}
 	}
-	fullConfig := wconfig.GetWatcher().GetFullConfig()
+	fullConfig := sconfig.GetWatcher().GetFullConfig()
 	connKeywords := fullConfig.Connections[connName]
 	connKeywordsMap := make(map[string]any)
 	err := utilfn.ReUnmarshal(&connKeywordsMap, connKeywords)
@@ -302,7 +302,7 @@ func getCustomInitScriptValue(meta starobj.MetaMapType, connName string, shellTy
 
 func resolveEnvMap(blockId string, blockMeta starobj.MetaMapType, connName string) (map[string]string, error) {
 	rtn := make(map[string]string)
-	config := wconfig.GetWatcher().GetFullConfig()
+	config := sconfig.GetWatcher().GetFullConfig()
 	connKeywords := config.Connections[connName]
 	ckEnv := connKeywords.CmdEnv
 	for k, v := range ckEnv {
@@ -439,7 +439,7 @@ func getLocalShellPath(blockMeta starobj.MetaMapType) string {
 	if shellPath != "" {
 		return shellPath
 	}
-	settings := wconfig.GetWatcher().GetFullConfig().Settings
+	settings := sconfig.GetWatcher().GetFullConfig().Settings
 	if settings.TermLocalShellPath != "" {
 		return settings.TermLocalShellPath
 	}
@@ -451,7 +451,7 @@ func getLocalShellOpts(blockMeta starobj.MetaMapType) []string {
 		opts := blockMeta.GetStringList(starobj.MetaKey_TermLocalShellOpts)
 		return append([]string{}, opts...)
 	}
-	settings := wconfig.GetWatcher().GetFullConfig().Settings
+	settings := sconfig.GetWatcher().GetFullConfig().Settings
 	if len(settings.TermLocalShellOpts) > 0 {
 		return append([]string{}, settings.TermLocalShellOpts...)
 	}

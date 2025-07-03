@@ -9,8 +9,8 @@ import (
 	"log"
 	"os"
 
+	"github.com/commandlinedev/starterm/pkg/sconfig"
 	"github.com/commandlinedev/starterm/pkg/util/utilfn"
-	"github.com/commandlinedev/starterm/pkg/wconfig"
 	"github.com/invopop/jsonschema"
 )
 
@@ -37,24 +37,24 @@ func generateSchema(template any, dir string) error {
 }
 
 func main() {
-	err := generateSchema(&wconfig.SettingsType{}, StarSchemaSettingsFileName)
+	err := generateSchema(&sconfig.SettingsType{}, StarSchemaSettingsFileName)
 	if err != nil {
 		log.Fatalf("settings schema error: %v", err)
 	}
 
-	connectionTemplate := make(map[string]wconfig.ConnKeywords)
+	connectionTemplate := make(map[string]sconfig.ConnKeywords)
 	err = generateSchema(&connectionTemplate, StarSchemaConnectionsFileName)
 	if err != nil {
 		log.Fatalf("connections schema error: %v", err)
 	}
 
-	aiPresetsTemplate := make(map[string]wconfig.AiSettingsType)
+	aiPresetsTemplate := make(map[string]sconfig.AiSettingsType)
 	err = generateSchema(&aiPresetsTemplate, StarSchemaAiPresetsFileName)
 	if err != nil {
 		log.Fatalf("ai presets schema error: %v", err)
 	}
 
-	widgetsTemplate := make(map[string]wconfig.WidgetConfigType)
+	widgetsTemplate := make(map[string]sconfig.WidgetConfigType)
 	err = generateSchema(&widgetsTemplate, StarSchemaWidgetsFileName)
 	if err != nil {
 		log.Fatalf("widgets schema error: %v", err)

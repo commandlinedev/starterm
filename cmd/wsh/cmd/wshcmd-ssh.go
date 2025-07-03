@@ -6,8 +6,8 @@ package cmd
 import (
 	"fmt"
 
+	"github.com/commandlinedev/starterm/pkg/sconfig"
 	"github.com/commandlinedev/starterm/pkg/starobj"
-	"github.com/commandlinedev/starterm/pkg/wconfig"
 	"github.com/commandlinedev/starterm/pkg/wshrpc"
 	"github.com/commandlinedev/starterm/pkg/wshrpc/wshclient"
 	"github.com/spf13/cobra"
@@ -47,7 +47,7 @@ func sshRun(cmd *cobra.Command, args []string) (rtnErr error) {
 	connOpts := wshrpc.ConnRequest{
 		Host:       sshArg,
 		LogBlockId: blockId,
-		Keywords: wconfig.ConnKeywords{
+		Keywords: sconfig.ConnKeywords{
 			SshIdentityFile: identityFiles,
 		},
 	}

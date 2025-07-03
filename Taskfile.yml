@@ -118,7 +118,7 @@ tasks:
         desc: Build the schema for configuration.
         sources:
             - "cmd/generateschema/*.go"
-            - "pkg/wconfig/*.go"
+            - "pkg/sconfig/*.go"
         generates:
             - "dist/schema/**/*"
         cmds:

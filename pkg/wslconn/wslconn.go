@@ -19,6 +19,7 @@ import (
 	"github.com/commandlinedev/starterm/pkg/genconn"
 	"github.com/commandlinedev/starterm/pkg/panichandler"
 	"github.com/commandlinedev/starterm/pkg/remote/conncontroller"
+	"github.com/commandlinedev/starterm/pkg/sconfig"
 	"github.com/commandlinedev/starterm/pkg/starbase"
 	"github.com/commandlinedev/starterm/pkg/starobj"
 	"github.com/commandlinedev/starterm/pkg/telemetry"
@@ -26,7 +27,6 @@ import (
 	"github.com/commandlinedev/starterm/pkg/userinput"
 	"github.com/commandlinedev/starterm/pkg/util/shellutil"
 	"github.com/commandlinedev/starterm/pkg/util/utilfn"
-	"github.com/commandlinedev/starterm/pkg/wconfig"
 	"github.com/commandlinedev/starterm/pkg/wps"
 	"github.com/commandlinedev/starterm/pkg/wshrpc"
 	"github.com/commandlinedev/starterm/pkg/wshutil"
@@ -421,7 +421,7 @@ func (conn *WslConn) getPermissionToInstallWsh(ctx context.Context, clientDispla
 	meta := make(map[string]any)
 	meta["conn:wshenabled"] = response.Confirm
 	conn.Infof(ctx, "writing conn:wshenabled=%v to connections.json\n", response.Confirm)
-	err = wconfig.SetConnectionsConfigValue(conn.GetName(), meta)
+	err = sconfig.SetConnectionsConfigValue(conn.GetName(), meta)
 	if err != nil {
 		log.Printf("warning: error writing to connections file: %v", err)
 	}
@@ -431,9 +431,9 @@ func (conn *WslConn) getPermissionToInstallWsh(ctx context.Context, clientDispla
 	if response.CheckboxStat {
 		conn.Infof(ctx, "writing conn:askbeforewshinstall=false to settings.json\n")
 		meta := starobj.MetaMapType{
-			wconfig.ConfigKey_ConnAskBeforeWshInstall: false,
+			sconfig.ConfigKey_ConnAskBeforeWshInstall: false,
 		}
-		setConfigErr := wconfig.SetBaseConfigValue(meta)
+		setConfigErr := sconfig.SetBaseConfigValue(meta)
 		if setConfigErr != nil {
 			// this is not a critical error, just log and continue
 			log.Printf("warning: error writing to base config file: %v", err)
@@ -577,9 +577,9 @@ func WithLockRtn[T any](conn *WslConn, fn func() T) T {
 
 // returns (enable-wsh, ask-before-install)
 func (conn *WslConn) getConnWshSettings() (bool, bool) {
-	config := wconfig.GetWatcher().GetFullConfig()
+	config := sconfig.GetWatcher().GetFullConfig()
 	enableWsh := config.Settings.ConnWshEnabled
-	askBeforeInstall := wconfig.DefaultBoolPtr(config.Settings.ConnAskBeforeWshInstall, true)
+	askBeforeInstall := sconfig.DefaultBoolPtr(config.Settings.ConnAskBeforeWshInstall, true)
 	connSettings, ok := conn.getConnectionConfig()
 	if ok {
 		if connSettings.ConnWshEnabled != nil {
@@ -658,11 +658,11 @@ func (conn *WslConn) tryEnableWsh(ctx context.Context, clientDisplayName string)
 	}
 }
 
-func (conn *WslConn) getConnectionConfig() (wconfig.ConnKeywords, bool) {
-	config := wconfig.GetWatcher().GetFullConfig()
+func (conn *WslConn) getConnectionConfig() (sconfig.ConnKeywords, bool) {
+	config := sconfig.GetWatcher().GetFullConfig()
 	connSettings, ok := config.Connections[conn.GetName()]
 	if !ok {
-		return wconfig.ConnKeywords{}, false
+		return sconfig.ConnKeywords{}, false
 	}
 	return connSettings, true
 }
@@ -680,7 +680,7 @@ func (conn *WslConn) persistWshInstalled(ctx context.Context, result WshCheckRes
 	}
 	meta := make(map[string]any)
 	meta["conn:wshenabled"] = result.WshEnabled
-	err := wconfig.SetConnectionsConfigValue(conn.GetName(), meta)
+	err := sconfig.SetConnectionsConfigValue(conn.GetName(), meta)
 	if err != nil {
 		conn.Infof(ctx, "WARN could not write conn:wshenabled=%v to connections.json: %v\n", result.WshEnabled, err)
 		log.Printf("warning: error writing to connections file: %v", err)

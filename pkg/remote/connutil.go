@@ -20,10 +20,10 @@ import (
 	"github.com/commandlinedev/starterm/pkg/blocklogger"
 	"github.com/commandlinedev/starterm/pkg/genconn"
 	"github.com/commandlinedev/starterm/pkg/remote/awsconn"
+	"github.com/commandlinedev/starterm/pkg/sconfig"
 	"github.com/commandlinedev/starterm/pkg/starbase"
 	"github.com/commandlinedev/starterm/pkg/util/iterfn"
 	"github.com/commandlinedev/starterm/pkg/util/shellutil"
-	"github.com/commandlinedev/starterm/pkg/wconfig"
 	"golang.org/x/crypto/ssh"
 )
 
@@ -192,7 +192,7 @@ func NormalizeConfigPattern(pattern string) string {
 }
 
 func ParseProfiles() []string {
-	connfile, cerrs := wconfig.ReadStarHomeConfigFile(wconfig.ProfilesFile)
+	connfile, cerrs := sconfig.ReadStarHomeConfigFile(sconfig.ProfilesFile)
 	if len(cerrs) > 0 {
 		log.Printf("error reading config file: %v", cerrs[0])
 		return nil

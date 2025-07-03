@@ -275,7 +275,7 @@ declare global {
         opts?: WebSelectorOpts;
     };
 
-    // wconfig.ConfigError
+    // sconfig.ConfigError
     type ConfigError = {
         file: string;
         err: string;
@@ -293,7 +293,7 @@ declare global {
         logblockid?: string;
     };
 
-    // wconfig.ConnKeywords
+    // sconfig.ConnKeywords
     type ConnKeywords = {
         "conn:wshenabled"?: boolean;
         "conn:askbeforewshinstall"?: boolean;
@@ -459,7 +459,7 @@ declare global {
         canmkdir: boolean;
     };
 
-    // wconfig.FullConfigType
+    // sconfig.FullConfigType
     type FullConfigType = {
         settings: SettingsType;
         mimetypes: {[key: string]: MimeTypeConfigType};
@@ -602,7 +602,7 @@ declare global {
         ReturnDesc: string;
     };
 
-    // wconfig.MimeTypeConfigType
+    // sconfig.MimeTypeConfigType
     type MimeTypeConfigType = {
         icon: string;
         color: string;
@@ -675,7 +675,7 @@ declare global {
         termsize: TermSize;
     };
 
-    // wconfig.SettingsType
+    // sconfig.SettingsType
     type SettingsType = {
         "app:*"?: boolean;
         "app:globalhotkey"?: string;
@@ -1014,7 +1014,7 @@ declare global {
         cols: number;
     };
 
-    // wconfig.TermThemeType
+    // sconfig.TermThemeType
     type TermThemeType = {
         "display:name": string;
         "display:order": number;
@@ -1296,12 +1296,12 @@ declare global {
         message: RpcMessage;
     };
 
-    // wconfig.WatcherUpdate
+    // sconfig.WatcherUpdate
     type WatcherUpdate = {
         fullconfig: FullConfigType;
     };
 
-    // wconfig.WebBookmark
+    // sconfig.WebBookmark
     type WebBookmark = {
         url: string;
         title?: string;
@@ -1333,7 +1333,7 @@ declare global {
         inner?: boolean;
     };
 
-    // wconfig.WidgetConfigType
+    // sconfig.WidgetConfigType
     type WidgetConfigType = {
         "display:order"?: number;
         "display:hidden"?: boolean;

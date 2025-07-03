@@ -1,6 +1,6 @@
 {
   "$schema": "https://json-schema.org/draft/2020-12/schema",
-  "$id": "https://github.com/commandlinedev/starterm/pkg/wconfig/settings-type",
+  "$id": "https://github.com/commandlinedev/starterm/pkg/sconfig/settings-type",
   "$ref": "#/$defs/SettingsType",
   "$defs": {
     "SettingsType": {

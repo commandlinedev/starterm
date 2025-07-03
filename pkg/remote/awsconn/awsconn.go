@@ -45,7 +45,7 @@ func GetConfig(ctx context.Context, profile string) (*aws.Config, error) {
 		profile = connMatch[1]
 
 		// TODO: Reimplement generic profile support
-		// profiles, cerrs := wconfig.ReadStarHomeConfigFile(wconfig.ProfilesFile)
+		// profiles, cerrs := sconfig.ReadStarHomeConfigFile(sconfig.ProfilesFile)
 		// if len(cerrs) > 0 {
 		// 	return nil, fmt.Errorf("error reading config file: %v", cerrs[0])
 		// }
