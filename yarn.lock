@@ -3578,9 +3578,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/language-service@npm:0.6.2":
-  version: 0.6.2
-  resolution: "@mdx-js/language-service@npm:0.6.2"
+"@mdx-js/language-service@npm:0.7.1":
+  version: 0.7.1
+  resolution: "@mdx-js/language-service@npm:0.7.1"
   dependencies:
     "@types/estree": "npm:^1.0.0"
     "@types/mdast": "npm:^4.0.0"
@@ -3597,7 +3597,7 @@ __metadata:
     unist-util-visit-parents: "npm:^6.0.0"
     vfile-message: "npm:^4.0.0"
     vscode-uri: "npm:^3.0.0"
-  checksum: 10c0/6ca784acc434a4b236cae58cf540a805de682b9fa01248fa8d35b10403b122c519ccc82eda601b3ca11041c431f7a963a09a6a25260e9f71ff6cec0976ffc0d5
+  checksum: 10c0/546a2f56ea5422c5b7ae0477cfc49ed932bcf70bef069fbed786149455223e9e3a527bc7344c05d0ba646c6eecc4be25e4ac235e3e83bed737aac3738b0c14c2
   languageName: node
   linkType: hard
 
@@ -3645,16 +3645,15 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@mdx-js/typescript-plugin@npm:^0.0.8":
-  version: 0.0.8
-  resolution: "@mdx-js/typescript-plugin@npm:0.0.8"
+"@mdx-js/typescript-plugin@npm:^0.1.1":
+  version: 0.1.1
+  resolution: "@mdx-js/typescript-plugin@npm:0.1.1"
   dependencies:
-    "@mdx-js/language-service": "npm:0.6.2"
+    "@mdx-js/language-service": "npm:0.7.1"
     "@volar/typescript": "npm:~2.4.0"
-    load-plugin: "npm:^6.0.0"
     remark-frontmatter: "npm:^5.0.0"
     remark-gfm: "npm:^4.0.0"
-  checksum: 10c0/9c2ef45420746d123052694e829f714092e0b3e18c13f79cdc11bac91308d8af3ea849f09cdb437e8e1dfd9beba66bfbf0fecaf3c4954044bbc8325e9e6807cd
+  checksum: 10c0/e325d7eff15c96e7c7d1bc638132bc92ca1ea314ae840ca53a251c30bdd16b956228add8e52c612554b2d05cdbeeeccf1b77be26bbc4c6977b8737a7b8dcf5ef
   languageName: node
   linkType: hard
 
@@ -19415,7 +19414,7 @@ __metadata:
     "@docusaurus/types": "npm:3.7.0"
     "@eslint/js": "npm:^9.20.0"
     "@mdx-js/react": "npm:^3.0.0"
-    "@mdx-js/typescript-plugin": "npm:^0.0.8"
+    "@mdx-js/typescript-plugin": "npm:^0.1.1"
     "@starterm/docusaurus-og": "https://github.com/commandlinedev/docusaurus-og.git"
     "@types/eslint": "npm:^9.6.1"
     "@types/eslint-config-prettier": "npm:^6.11.3"

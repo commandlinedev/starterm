@@ -40,7 +40,7 @@
         "@docusaurus/tsconfig": "3.7.0",
         "@docusaurus/types": "3.7.0",
         "@eslint/js": "^9.20.0",
-        "@mdx-js/typescript-plugin": "^0.0.8",
+        "@mdx-js/typescript-plugin": "^0.1.1",
         "@types/eslint": "^9.6.1",
         "@types/eslint-config-prettier": "^6.11.3",
         "eslint": "^9.20.1",
