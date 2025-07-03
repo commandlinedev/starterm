@@ -559,7 +559,6 @@ declare global {
         "editor:minimapenabled"?: boolean;
         "editor:stickyscrollenabled"?: boolean;
         "editor:wordwrap"?: boolean;
-        "editor:fontsize"?: number;
         "graph:*"?: boolean;
         "graph:numpoints"?: number;
         "graph:metrics"?: string[];
@@ -751,6 +750,148 @@ declare global {
         "conn:*"?: boolean;
         "conn:askbeforewshinstall"?: boolean;
         "conn:wshenabled"?: boolean;
+    };
+
+    // wshrpc.StarAIOptsType
+    type StarAIOptsType = {
+        model: string;
+        apitype?: string;
+        apitoken: string;
+        orgid?: string;
+        apiversion?: string;
+        baseurl?: string;
+        maxtokens?: number;
+        maxchoices?: number;
+        timeoutms?: number;
+    };
+
+    // wshrpc.StarAIPacketType
+    type StarAIPacketType = {
+        type: string;
+        model?: string;
+        created?: number;
+        finish_reason?: string;
+        usage?: StarAIUsageType;
+        index?: number;
+        text?: string;
+        error?: string;
+    };
+
+    // wshrpc.StarAIPromptMessageType
+    type StarAIPromptMessageType = {
+        role: string;
+        content: string;
+        name?: string;
+    };
+
+    // wshrpc.StarAIStreamRequest
+    type StarAIStreamRequest = {
+        clientid?: string;
+        opts: StarAIOptsType;
+        prompt: StarAIPromptMessageType[];
+    };
+
+    // wshrpc.StarAIUsageType
+    type StarAIUsageType = {
+        prompt_tokens?: number;
+        completion_tokens?: number;
+        total_tokens?: number;
+    };
+
+    // wps.StarEvent
+    type StarEvent = {
+        event: string;
+        scopes?: string[];
+        sender?: string;
+        persist?: number;
+        data?: any;
+    };
+
+    // filestore.StarFile
+    type StarFile = {
+        zoneid: string;
+        name: string;
+        opts: FileOpts;
+        createdts: number;
+        size: number;
+        modts: number;
+        meta: {[key: string]: any};
+    };
+
+    // wshrpc.StarInfoData
+    type StarInfoData = {
+        version: string;
+        clientid: string;
+        buildtime: string;
+        configdir: string;
+        datadir: string;
+    };
+
+    // vdom.StarKeyboardEvent
+    type StarKeyboardEvent = {
+        type: "keydown"|"keyup"|"keypress"|"unknown";
+        key: string;
+        code: string;
+        repeat?: boolean;
+        location?: number;
+        shift?: boolean;
+        control?: boolean;
+        alt?: boolean;
+        meta?: boolean;
+        cmd?: boolean;
+        option?: boolean;
+    };
+
+    // wshrpc.StarNotificationOptions
+    type StarNotificationOptions = {
+        title?: string;
+        body?: string;
+        silent?: boolean;
+    };
+
+    // starobj.StarObj
+    type StarObj = {
+        otype: string;
+        oid: string;
+        version: number;
+        meta: MetaType;
+    };
+
+    // starobj.StarObjUpdate
+    type StarObjUpdate = {
+        updatetype: string;
+        otype: string;
+        oid: string;
+        obj?: StarObj;
+    };
+
+    // vdom.StarPointerData
+    type StarPointerData = {
+        button: number;
+        buttons: number;
+        clientx?: number;
+        clienty?: number;
+        pagex?: number;
+        pagey?: number;
+        screenx?: number;
+        screeny?: number;
+        movementx?: number;
+        movementy?: number;
+        shift?: boolean;
+        control?: boolean;
+        alt?: boolean;
+        meta?: boolean;
+        cmd?: boolean;
+        option?: boolean;
+    };
+
+    // starobj.Window
+    type StarWindow = StarObj & {
+        workspaceid: string;
+        isnew?: boolean;
+        pos: Point;
+        winsize: WinSize;
+        lastfocusts: number;
     };
 
     // starobj.StickerClickOptsType
@@ -1158,148 +1299,6 @@ declare global {
     // wconfig.WatcherUpdate
     type WatcherUpdate = {
         fullconfig: FullConfigType;
-    };
-
-    // wshrpc.StarAIOptsType
-    type StarAIOptsType = {
-        model: string;
-        apitype?: string;
-        apitoken: string;
-        orgid?: string;
-        apiversion?: string;
-        baseurl?: string;
-        maxtokens?: number;
-        maxchoices?: number;
-        timeoutms?: number;
-    };
-
-    // wshrpc.StarAIPacketType
-    type StarAIPacketType = {
-        type: string;
-        model?: string;
-        created?: number;
-        finish_reason?: string;
-        usage?: StarAIUsageType;
-        index?: number;
-        text?: string;
-        error?: string;
-    };
-
-    // wshrpc.StarAIPromptMessageType
-    type StarAIPromptMessageType = {
-        role: string;
-        content: string;
-        name?: string;
-    };
-
-    // wshrpc.StarAIStreamRequest
-    type StarAIStreamRequest = {
-        clientid?: string;
-        opts: StarAIOptsType;
-        prompt: StarAIPromptMessageType[];
-    };
-
-    // wshrpc.StarAIUsageType
-    type StarAIUsageType = {
-        prompt_tokens?: number;
-        completion_tokens?: number;
-        total_tokens?: number;
-    };
-
-    // wps.StarEvent
-    type StarEvent = {
-        event: string;
-        scopes?: string[];
-        sender?: string;
-        persist?: number;
-        data?: any;
-    };
-
-    // filestore.StarFile
-    type StarFile = {
-        zoneid: string;
-        name: string;
-        opts: FileOpts;
-        createdts: number;
-        size: number;
-        modts: number;
-        meta: {[key: string]: any};
-    };
-
-    // wshrpc.StarInfoData
-    type StarInfoData = {
-        version: string;
-        clientid: string;
-        buildtime: string;
-        configdir: string;
-        datadir: string;
-    };
-
-    // vdom.StarKeyboardEvent
-    type StarKeyboardEvent = {
-        type: "keydown"|"keyup"|"keypress"|"unknown";
-        key: string;
-        code: string;
-        repeat?: boolean;
-        location?: number;
-        shift?: boolean;
-        control?: boolean;
-        alt?: boolean;
-        meta?: boolean;
-        cmd?: boolean;
-        option?: boolean;
-    };
-
-    // wshrpc.StarNotificationOptions
-    type StarNotificationOptions = {
-        title?: string;
-        body?: string;
-        silent?: boolean;
-    };
-
-    // starobj.StarObj
-    type StarObj = {
-        otype: string;
-        oid: string;
-        version: number;
-        meta: MetaType;
-    };
-
-    // starobj.StarObjUpdate
-    type StarObjUpdate = {
-        updatetype: string;
-        otype: string;
-        oid: string;
-        obj?: StarObj;
-    };
-
-    // vdom.StarPointerData
-    type StarPointerData = {
-        button: number;
-        buttons: number;
-        clientx?: number;
-        clienty?: number;
-        pagex?: number;
-        pagey?: number;
-        screenx?: number;
-        screeny?: number;
-        movementx?: number;
-        movementy?: number;
-        shift?: boolean;
-        control?: boolean;
-        alt?: boolean;
-        meta?: boolean;
-        cmd?: boolean;
-        option?: boolean;
-    };
-
-    // starobj.Window
-    type StarWindow = StarObj & {
-        workspaceid: string;
-        isnew?: boolean;
-        pos: Point;
-        winsize: WinSize;
-        lastfocusts: number;
     };
 
     // wconfig.WebBookmark

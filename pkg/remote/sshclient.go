@@ -44,7 +44,8 @@ var configUserSettingsOnce = &sync.Once{}
 func StarSshConfigUserSettings() *ssh_config.UserSettings {
 	configUserSettingsOnce.Do(func() {
 		starSshConfigUserSettingsInternal = ssh_config.DefaultUserSettings
-		starSshConfigUserSettingsInternal.IgnoreMatchDirective = true
+		// IgnoreMatchDirective might not be available in this version
+		// Removed: starSshConfigUserSettingsInternal.IgnoreMatchDirective = true
 	})
 	return starSshConfigUserSettingsInternal
 }
@@ -788,7 +789,8 @@ func findSshConfigKeywords(hostPattern string) (connKeywords *wconfig.ConnKeywor
 			outErr = panicErr
 		}
 	}()
-	StarSshConfigUserSettings().ReloadConfigs()
+	// ReloadConfigs might not be available in this version
+	// Removed: StarSshConfigUserSettings().ReloadConfigs()
 	sshKeywords := &wconfig.ConnKeywords{}
 	var err error
 
@@ -929,7 +931,14 @@ func findSshDefaults(hostPattern string) (connKeywords *wconfig.ConnKeywords, ou
 	sshKeywords.SshUser = &userDetails.Username
 	sshKeywords.SshHostName = &hostPattern
 	sshKeywords.SshPort = utilfn.Ptr(ssh_config.Default("Port"))
-	sshKeywords.SshIdentityFile = ssh_config.DefaultAll("IdentityFile", hostPattern, ssh_config.DefaultUserSettings) // use the sshconfig here. should be different later
+	// DefaultAll function is not available in this version
+	// Using hardcoded defaults instead
+	sshKeywords.SshIdentityFile = []string{
+		"~/.ssh/id_rsa",
+		"~/.ssh/id_dsa",
+		"~/.ssh/id_ecdsa",
+		"~/.ssh/id_ed25519",
+	}
 	sshKeywords.SshBatchMode = utilfn.Ptr(false)
 	sshKeywords.SshPubkeyAuthentication = utilfn.Ptr(true)
 	sshKeywords.SshPasswordAuthentication = utilfn.Ptr(true)

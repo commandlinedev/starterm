@@ -489,19 +489,25 @@ func SetViewCommand(w *wshutil.WshRpc, data wshrpc.CommandBlockSetViewData, opts
 	return err
 }
 
+// command "starinfo", wshserver.StarInfoCommand
+func StarInfoCommand(w *wshutil.WshRpc, opts *wshrpc.RpcOpts) (*wshrpc.StarInfoData, error) {
+	resp, err := sendRpcRequestCallHelper[*wshrpc.StarInfoData](w, "starinfo", nil, opts)
+	return resp, err
+}
+
 // command "streamcpudata", wshserver.StreamCpuDataCommand
 func StreamCpuDataCommand(w *wshutil.WshRpc, data wshrpc.CpuDataRequest, opts *wshrpc.RpcOpts) chan wshrpc.RespOrErrorUnion[wshrpc.TimeSeriesData] {
 	return sendRpcRequestResponseStreamHelper[wshrpc.TimeSeriesData](w, "streamcpudata", data, opts)
 }
 
-// command "streamtest", wshserver.StreamTestCommand
-func StreamTestCommand(w *wshutil.WshRpc, opts *wshrpc.RpcOpts) chan wshrpc.RespOrErrorUnion[int] {
-	return sendRpcRequestResponseStreamHelper[int](w, "streamtest", nil, opts)
-}
-
 // command "streamstarai", wshserver.StreamStarAiCommand
 func StreamStarAiCommand(w *wshutil.WshRpc, data wshrpc.StarAIStreamRequest, opts *wshrpc.RpcOpts) chan wshrpc.RespOrErrorUnion[wshrpc.StarAIPacketType] {
 	return sendRpcRequestResponseStreamHelper[wshrpc.StarAIPacketType](w, "streamstarai", data, opts)
+}
+
+// command "streamtest", wshserver.StreamTestCommand
+func StreamTestCommand(w *wshutil.WshRpc, opts *wshrpc.RpcOpts) chan wshrpc.RespOrErrorUnion[int] {
+	return sendRpcRequestResponseStreamHelper[int](w, "streamtest", nil, opts)
 }
 
 // command "test", wshserver.TestCommand
@@ -535,12 +541,6 @@ func VDomUrlRequestCommand(w *wshutil.WshRpc, data wshrpc.VDomUrlRequestData, op
 // command "waitforroute", wshserver.WaitForRouteCommand
 func WaitForRouteCommand(w *wshutil.WshRpc, data wshrpc.CommandWaitForRouteData, opts *wshrpc.RpcOpts) (bool, error) {
 	resp, err := sendRpcRequestCallHelper[bool](w, "waitforroute", data, opts)
-	return resp, err
-}
-
-// command "starinfo", wshserver.StarInfoCommand
-func StarInfoCommand(w *wshutil.WshRpc, opts *wshrpc.RpcOpts) (*wshrpc.StarInfoData, error) {
-	resp, err := sendRpcRequestCallHelper[*wshrpc.StarInfoData](w, "starinfo", nil, opts)
 	return resp, err
 }
 

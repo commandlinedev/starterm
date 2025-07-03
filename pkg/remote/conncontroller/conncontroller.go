@@ -890,7 +890,11 @@ func resolveSshConfigPatterns(configFiles []string) ([]string, error) {
 			continue
 		}
 
-		cfg, _ := ssh_config.Decode(fd, true)
+		cfg, err := ssh_config.Decode(fd)
+		if err != nil {
+			errs = append(errs, err)
+			continue
+		}
 		for _, host := range cfg.Hosts {
 			// for each host, find the first good alias
 			for _, hostPattern := range host.Patterns {
@@ -976,7 +980,5 @@ func GetConnectionsFromConfig() ([]string, error) {
 	localConfig := filepath.Join(home, ".ssh", "config")
 	systemConfig := filepath.Join("/etc", "ssh", "config")
 	sshConfigFiles := []string{localConfig, systemConfig}
-	remote.StarSshConfigUserSettings().ReloadConfigs()
-
 	return resolveSshConfigPatterns(sshConfigFiles)
 }

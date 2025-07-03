@@ -11,7 +11,7 @@ import { atom, useAtomValue } from "jotai";
 import { useCallback } from "react";
 import "./helpview.scss";
 
-const docsiteWebUrl = "https://docs.starterm.dev/";
+const docsiteWebUrl = "https://commandlinedev.github.io/";
 const baseUrlRegex = /http[s]?:\/\/([^:\/])+(:\d+)?/;
 
 class HelpViewModel extends WebViewModel {

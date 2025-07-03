@@ -10,13 +10,13 @@ class BlockServiceType {
     GetControllerStatus(arg2: string): Promise<BlockControllerRuntimeStatus> {
         return WOS.callBackendService("block", "GetControllerStatus", Array.from(arguments))
     }
+    SaveStarAiData(arg2: string, arg3: StarAIPromptMessageType[]): Promise<void> {
+        return WOS.callBackendService("block", "SaveStarAiData", Array.from(arguments))
+    }
 
     // save the terminal state to a blockfile
     SaveTerminalState(blockId: string, state: string, stateType: string, ptyOffset: number, termSize: TermSize): Promise<void> {
         return WOS.callBackendService("block", "SaveTerminalState", Array.from(arguments))
-    }
-    SaveStarAiData(arg2: string, arg3: StarAIPromptMessageType[]): Promise<void> {
-        return WOS.callBackendService("block", "SaveStarAiData", Array.from(arguments))
     }
 }
 

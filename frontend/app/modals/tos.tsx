@@ -93,7 +93,7 @@ const ModalPage1 = () => {
                         <div className="content-section-title">Telemetry</div>
                         <div className="content-section-text">
                             We collect minimal anonymous{" "}
-                            <a target="_blank" href="https://docs.starterm.dev/telemetry" rel={"noopener"}>
+                            <a target="_blank" href="https://commandlinedev.github.io/telemetry" rel={"noopener"}>
                                 telemetry data
                             </a>{" "}
                             to help us understand how people are using Star (

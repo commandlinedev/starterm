@@ -180,7 +180,7 @@ const QuickTips = () => {
                         <i className="fa-solid fa-sharp fa-sliders fa-fw" />
                     </div>
                     <div>
-                        <a target="_blank" href="https://docs.starterm.dev/config" rel="noopener">
+                        <a target="_blank" href="https://commandlinedev.github.io/config" rel="noopener">
                             Configuration Options
                         </a>
                     </div>
