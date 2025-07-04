@@ -18,6 +18,9 @@ const config = {
     npmRebuild: false,
     nodeGypRebuild: false,
     electronCompile: false,
+    buildDependenciesFromSource: false,
+    includeSubNodeModules: false,
+    electronDist: "node_modules/electron/dist",
     files: [
         {
             from: "./dist",
