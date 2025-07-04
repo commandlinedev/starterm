@@ -19,8 +19,8 @@ const config = {
     nodeGypRebuild: false,
     electronCompile: false,
     buildDependenciesFromSource: false,
-    includeSubNodeModules: false,
     electronDist: "node_modules/electron/dist",
+    nativeRebuilder: "legacy",
     files: [
         {
             from: "./dist",
