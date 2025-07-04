@@ -20,6 +20,8 @@ import (
 	"github.com/commandlinedev/starterm/pkg/panichandler"
 	"github.com/commandlinedev/starterm/pkg/remote/conncontroller"
 	"github.com/commandlinedev/starterm/pkg/remote/fileshare/wshfs"
+	"github.com/commandlinedev/starterm/pkg/sconfig"
+	"github.com/commandlinedev/starterm/pkg/score"
 	"github.com/commandlinedev/starterm/pkg/service"
 	"github.com/commandlinedev/starterm/pkg/starbase"
 	"github.com/commandlinedev/starterm/pkg/starobj"
@@ -29,8 +31,6 @@ import (
 	"github.com/commandlinedev/starterm/pkg/util/sigutil"
 	"github.com/commandlinedev/starterm/pkg/util/utilfn"
 	"github.com/commandlinedev/starterm/pkg/wcloud"
-	"github.com/commandlinedev/starterm/pkg/wconfig"
-	"github.com/commandlinedev/starterm/pkg/wcore"
 	"github.com/commandlinedev/starterm/pkg/web"
 	"github.com/commandlinedev/starterm/pkg/wps"
 	"github.com/commandlinedev/starterm/pkg/wshrpc"
@@ -64,7 +64,7 @@ func doShutdown(reason string) {
 		// TODO deal with flush in progress
 		clearTempFiles()
 		filestore.WFS.FlushCache(ctx)
-		watcher := wconfig.GetWatcher()
+		watcher := sconfig.GetWatcher()
 		if watcher != nil {
 			watcher.Close()
 		}
@@ -87,7 +87,7 @@ func stdinReadWatch() {
 }
 
 func startConfigWatcher() {
-	watcher := wconfig.GetWatcher()
+	watcher := sconfig.GetWatcher()
 	if watcher != nil {
 		watcher.Start()
 	}
@@ -345,7 +345,7 @@ func main() {
 			log.Printf("error initializing wsh and shell-integration files: %v\n", err)
 		}
 	}()
-	err = wcore.EnsureInitialData()
+	err = score.EnsureInitialData()
 	if err != nil {
 		log.Printf("error ensuring initial data: %v\n", err)
 		return

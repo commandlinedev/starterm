@@ -34,7 +34,7 @@ Modern development involves constantly switching between terminals and browsers 
 
 Star Terminal works on macOS, Linux, and Windows.
 
-Platform-specific installation instructions can be found [here](https://docs.starterm.dev/gettingstarted).
+Platform-specific installation instructions can be found [here](https://commandlinedev.github.io/gettingstarted).
 
 You can also install Star Terminal directly from: [www.starterm.dev/download](https://www.starterm.dev/download).
 
@@ -62,8 +62,8 @@ Want to provide input to our future releases? Connect with us on [Discord](https
 
 - Homepage &mdash; https://www.starterm.dev
 - Download Page &mdash; https://www.starterm.dev/download
-- Documentation &mdash; https://docs.starterm.dev
-- Legacy Documentation &mdash; https://legacydocs.starterm.dev
+- Documentation &mdash; https://commandlinedev.github.io
+- Legacy Documentation &mdash; https://legacycommandlinedev.github.io
 - Blog &mdash; https://blog.starterm.dev
 - X &mdash; https://x.com/commandlinedev
 - Discord Community &mdash; https://discord.gg/XfvZ334gwU
@@ -80,7 +80,7 @@ Find more information in our [Contributions Guide](CONTRIBUTING.md), which inclu
 
 - [Ways to contribute](CONTRIBUTING.md#contributing-to-star-terminal)
 - [Contribution guidelines](CONTRIBUTING.md#before-you-start)
-- [Storybook](https://docs.starterm.dev/storybook)
+- [Storybook](https://commandlinedev.github.io/storybook)
 
 ## License
 

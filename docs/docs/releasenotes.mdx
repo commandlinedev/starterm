@@ -6,7 +6,7 @@ sidebar_position: 200
 
 # Release Notes
 
-### v0.11.3 &mdash; May 2, 2025
+### v0.1.1 &mdash; May 2, 2025
 
 Quick patch release to update packages, fix some security issues (with dependent packages), and some small bug fixes.
 
@@ -104,8 +104,8 @@ Quick update with bug fixes and new configuration options
 
 Quick update to v0.10 with new features and bug fixes.
 
-- Global hotkey support [docs](https://docs.starterm.dev/config#customizable-systemwide-global-hotkey)
-- Added configuration to override the font size for markdown, AI-chat, and preview editor [docs](https://docs.starterm.dev/config)
+- Global hotkey support [docs](https://commandlinedev.github.io/config#customizable-systemwide-global-hotkey)
+- Added configuration to override the font size for markdown, AI-chat, and preview editor [docs](https://commandlinedev.github.io/config)
 - Added ability to set independent zoom level for the web view (right click block header)
 - New `wsh starpath` command to open the config directory, data directory, and log file
 - [bugfix] Fixed crash when /etc/sshd_config contained an unsupported Match directive (most common on Fedora)
@@ -126,15 +126,15 @@ Quick update to fix the workspace app menu actions. Also fixes workspace switchi
 Star Terminal v0.10.0 introduces workspaces, making it easier to manage multiple work environments. We've added powerful new command execution capabilities with `wsh run`, allowing you to launch and control commands in dedicated blocks. This release also brings significant improvements to SSH with a new connections configuration system for managing your remote environments.
 
 - **Workspaces**: Organize your work into separate environments, each with their own tabs, layouts, and settings
-- **Command Blocks**: New `wsh run` command for launching terminal commands in dedicated blocks, with support for magnification, auto-closing, and execution control ([docs](https://docs.starterm.dev/wsh-reference#run))
-- **Connections**: New configuration system for managing SSH connections, with support for wsh-free operation, per-connection themes, and more ([docs](https://docs.starterm.dev/connections))
+- **Command Blocks**: New `wsh run` command for launching terminal commands in dedicated blocks, with support for magnification, auto-closing, and execution control ([docs](https://commandlinedev.github.io/wsh-reference#run))
+- **Connections**: New configuration system for managing SSH connections, with support for wsh-free operation, per-connection themes, and more ([docs](https://commandlinedev.github.io/connections))
 - Improved tab management with better switching behavior and context menus (many bug fixes)
 - New tab features including pinned tabs and drag-and-drop improvements
 - Create, rename, and delete files/directories directly in directory preview
 - Attempt wsh-free connection as a fallback if wsh installation or execution fails
 - New `-i` flag to add identity files with the `wsh ssh` command
-- Added Perplexity API integration ([docs](https://docs.starterm.dev/faq#perplexity))
-- `wsh setbg` command for background handling ([docs](https://docs.starterm.dev/wsh-reference#setbg))
+- Added Perplexity API integration ([docs](https://commandlinedev.github.io/faq#perplexity))
+- `wsh setbg` command for background handling ([docs](https://commandlinedev.github.io/wsh-reference#setbg))
 - Switched from Less to SCSS for styling
 - [bugfix] Fixed tab flickering issues during tab switches
 - [bugfix] Corrected StarAI text area resize behavior
@@ -143,15 +143,15 @@ Star Terminal v0.10.0 introduces workspaces, making it easier to manage multiple
 - [bugfix] Fixed unresponsive context menus
 - [bugfix] Fixed connection errors in Help block
 - Upgraded Go toolchain to 1.23.4
-- Lots of new documentation, including new pages for [Getting Started](https://docs.starterm.dev/gettingstarted), [AI Presets](https://docs.starterm.dev/ai-presets), and [wsh overview](https://docs.starterm.dev/wsh).
+- Lots of new documentation, including new pages for [Getting Started](https://commandlinedev.github.io/gettingstarted), [AI Presets](https://commandlinedev.github.io/ai-presets), and [wsh overview](https://commandlinedev.github.io/wsh).
 - Other bug fixes, performance improvements, and dependency updates
 
 ### v0.9.3 &mdash; Nov 20, 2024
 
 New minor release that introduces Star's connected computing extensions. We've introduced new `wsh` commands that allow you to store variables and files, and access them across terminal sessions (on both local and remote machines).
 
-- `wsh setvar/getvar` to get and set variables -- [Docs](https://docs.starterm.dev/wsh-reference#getvarsetvar)
-- `wsh file` operations (cat, write, append, rm, info, cp, and ls) -- [Docs](https://docs.starterm.dev/wsh-reference#file)
+- `wsh setvar/getvar` to get and set variables -- [Docs](https://commandlinedev.github.io/wsh-reference#getvarsetvar)
+- `wsh file` operations (cat, write, append, rm, info, cp, and ls) -- [Docs](https://commandlinedev.github.io/wsh-reference#file)
 - Improved golang panic handling to prevent backend crashes
 - Improved SSH config logging and fixes a reused connection bug
 - Updated telemetry to track additional counters
@@ -172,7 +172,7 @@ New minor release that introduces Star's connected computing extensions. We've i
 
 ### v0.9.2 &mdash; Nov 11, 2024
 
-New minor release with bug fixes and new features! Fixed the bug around making Star fullscreen (also affecting certain window managers like Hyprland). We've also put a lot of work into the doc site (https://docs.starterm.dev), including documenting how [Widgets](./widgets) and [Presets](./presets) work!
+New minor release with bug fixes and new features! Fixed the bug around making Star fullscreen (also affecting certain window managers like Hyprland). We've also put a lot of work into the doc site (https://commandlinedev.github.io), including documenting how [Widgets](./widgets) and [Presets](./presets) work!
 
 - Updated documentation
 - Star AI now supports the Anthropic API! Checkout the [FAQ](./faq) for how to use the Claude models with Star AI.
@@ -254,7 +254,7 @@ Hotfix release to address a couple of bugs introduced in v0.8.10
 
 Minor big fix release (but there are some new features).
 
-- added support for Azure AI [See FAQ](https://docs.starterm.dev/faq#how-can-i-connect-to-azure-ai)
+- added support for Azure AI [See FAQ](https://commandlinedev.github.io/faq#how-can-i-connect-to-azure-ai)
 - AI errors now appear in the chat
 - on MacOS, hitting "Space" in directorypreview will open selected file in Quick Look
 - [bugfix] fixed transparency settings
@@ -265,7 +265,7 @@ Minor big fix release (but there are some new features).
 
 Lots of bug fixes and new features!
 
-- New "help" view -- uses an embedded version of our doc site -- https://docs.starterm.dev
+- New "help" view -- uses an embedded version of our doc site -- https://commandlinedev.github.io
 - [breaking] wsh getmeta, wsh setmeta, and wsh deleteblock now take a blockid using a `-b` parameter instead of as a positional parameter
 - allow metadata to override the block icon, header, and text (frame:title, frame:icon, and frame:text)
 - home button on web widget to return to the homepage, option to set a homepage default for the whole app or just for the given block

@@ -11,9 +11,9 @@ import (
 
 	"github.com/commandlinedev/starterm/pkg/blockcontroller"
 	"github.com/commandlinedev/starterm/pkg/panichandler"
+	"github.com/commandlinedev/starterm/pkg/score"
 	"github.com/commandlinedev/starterm/pkg/starobj"
 	"github.com/commandlinedev/starterm/pkg/tsgen/tsgenmeta"
-	"github.com/commandlinedev/starterm/pkg/wcore"
 	"github.com/commandlinedev/starterm/pkg/wps"
 	"github.com/commandlinedev/starterm/pkg/wstore"
 )
@@ -30,7 +30,7 @@ func (svc *WorkspaceService) CreateWorkspace_Meta() tsgenmeta.MethodMeta {
 }
 
 func (svc *WorkspaceService) CreateWorkspace(ctx context.Context, name string, icon string, color string, applyDefaults bool) (string, error) {
-	newWS, err := wcore.CreateWorkspace(ctx, name, icon, color, applyDefaults, false)
+	newWS, err := score.CreateWorkspace(ctx, name, icon, color, applyDefaults, false)
 	if err != nil {
 		return "", fmt.Errorf("error creating workspace: %w", err)
 	}
@@ -45,7 +45,7 @@ func (svc *WorkspaceService) UpdateWorkspace_Meta() tsgenmeta.MethodMeta {
 
 func (svc *WorkspaceService) UpdateWorkspace(ctx context.Context, workspaceId string, name string, icon string, color string, applyDefaults bool) (starobj.UpdatesRtnType, error) {
 	ctx = starobj.ContextWithUpdates(ctx)
-	_, updated, err := wcore.UpdateWorkspace(ctx, workspaceId, name, icon, color, applyDefaults)
+	_, updated, err := score.UpdateWorkspace(ctx, workspaceId, name, icon, color, applyDefaults)
 	if err != nil {
 		return nil, fmt.Errorf("error updating workspace: %w", err)
 	}
@@ -94,7 +94,7 @@ func (svc *WorkspaceService) DeleteWorkspace(workspaceId string) (starobj.Update
 	ctx, cancelFn := context.WithTimeout(context.Background(), DefaultTimeout)
 	defer cancelFn()
 	ctx = starobj.ContextWithUpdates(ctx)
-	deleted, claimableWorkspace, err := wcore.DeleteWorkspace(ctx, workspaceId, true)
+	deleted, claimableWorkspace, err := score.DeleteWorkspace(ctx, workspaceId, true)
 	if claimableWorkspace != "" {
 		return nil, claimableWorkspace, nil
 	}
@@ -117,7 +117,7 @@ func (svc *WorkspaceService) DeleteWorkspace(workspaceId string) (starobj.Update
 func (svc *WorkspaceService) ListWorkspaces() (starobj.WorkspaceList, error) {
 	ctx, cancelFn := context.WithTimeout(context.Background(), DefaultTimeout)
 	defer cancelFn()
-	return wcore.ListWorkspaces(ctx)
+	return score.ListWorkspaces(ctx)
 }
 
 func (svc *WorkspaceService) CreateTab_Meta() tsgenmeta.MethodMeta {
@@ -134,7 +134,7 @@ func (svc *WorkspaceService) GetColors_Meta() tsgenmeta.MethodMeta {
 }
 
 func (svc *WorkspaceService) GetColors() []string {
-	return wcore.WorkspaceColors[:]
+	return score.WorkspaceColors[:]
 }
 
 func (svc *WorkspaceService) GetIcons_Meta() tsgenmeta.MethodMeta {
@@ -144,14 +144,14 @@ func (svc *WorkspaceService) GetIcons_Meta() tsgenmeta.MethodMeta {
 }
 
 func (svc *WorkspaceService) GetIcons() []string {
-	return wcore.WorkspaceIcons[:]
+	return score.WorkspaceIcons[:]
 }
 
 func (svc *WorkspaceService) CreateTab(workspaceId string, tabName string, activateTab bool, pinned bool) (string, starobj.UpdatesRtnType, error) {
 	ctx, cancelFn := context.WithTimeout(context.Background(), DefaultTimeout)
 	defer cancelFn()
 	ctx = starobj.ContextWithUpdates(ctx)
-	tabId, err := wcore.CreateTab(ctx, workspaceId, tabName, activateTab, pinned, false)
+	tabId, err := score.CreateTab(ctx, workspaceId, tabName, activateTab, pinned, false)
 	if err != nil {
 		return "", nil, fmt.Errorf("error creating tab: %w", err)
 	}
@@ -174,7 +174,7 @@ func (svc *WorkspaceService) ChangeTabPinning_Meta() tsgenmeta.MethodMeta {
 func (svc *WorkspaceService) ChangeTabPinning(ctx context.Context, workspaceId string, tabId string, pinned bool) (starobj.UpdatesRtnType, error) {
 	log.Printf("ChangeTabPinning %s %s %v\n", workspaceId, tabId, pinned)
 	ctx = starobj.ContextWithUpdates(ctx)
-	err := wcore.ChangeTabPinning(ctx, workspaceId, tabId, pinned)
+	err := score.ChangeTabPinning(ctx, workspaceId, tabId, pinned)
 	if err != nil {
 		return nil, fmt.Errorf("error toggling tab pinning: %w", err)
 	}
@@ -199,7 +199,7 @@ func (svc *WorkspaceService) UpdateTabIds(uiContext starobj.UIContext, workspace
 	ctx, cancelFn := context.WithTimeout(context.Background(), DefaultTimeout)
 	defer cancelFn()
 	ctx = starobj.ContextWithUpdates(ctx)
-	err := wcore.UpdateWorkspaceTabIds(ctx, workspaceId, tabIds, pinnedTabIds)
+	err := score.UpdateWorkspaceTabIds(ctx, workspaceId, tabIds, pinnedTabIds)
 	if err != nil {
 		return nil, fmt.Errorf("error updating workspace tab ids: %w", err)
 	}
@@ -216,7 +216,7 @@ func (svc *WorkspaceService) SetActiveTab(workspaceId string, tabId string) (sta
 	ctx, cancelFn := context.WithTimeout(context.Background(), DefaultTimeout)
 	defer cancelFn()
 	ctx = starobj.ContextWithUpdates(ctx)
-	err := wcore.SetActiveTab(ctx, workspaceId, tabId)
+	err := score.SetActiveTab(ctx, workspaceId, tabId)
 	if err != nil {
 		return nil, fmt.Errorf("error setting active tab: %w", err)
 	}
@@ -268,7 +268,7 @@ func (svc *WorkspaceService) CloseTab(ctx context.Context, workspaceId string, t
 			blockcontroller.StopBlockController(blockId)
 		}
 	}()
-	newActiveTabId, err := wcore.DeleteTab(ctx, workspaceId, tabId, true)
+	newActiveTabId, err := score.DeleteTab(ctx, workspaceId, tabId, true)
 	if err != nil {
 		return nil, nil, fmt.Errorf("error closing tab: %w", err)
 	}

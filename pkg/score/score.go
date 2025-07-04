@@ -2,7 +2,7 @@
 // SPDX-License-Identifier: Apache-2.0
 
 // star core application coordinator
-package wcore
+package score
 
 import (
 	"context"
@@ -16,7 +16,7 @@ import (
 	"github.com/commandlinedev/starterm/pkg/wstore"
 )
 
-// the wcore package coordinates actions across the storage layer
+// the score package coordinates actions across the storage layer
 // orchestrating the star object store, the star pubsub system, and the star rpc system
 
 // Ensures that the initial data is present in the store, creates an initial window if needed

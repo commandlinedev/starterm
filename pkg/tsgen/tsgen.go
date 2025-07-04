@@ -12,13 +12,13 @@ import (
 
 	"github.com/commandlinedev/starterm/pkg/eventbus"
 	"github.com/commandlinedev/starterm/pkg/filestore"
+	"github.com/commandlinedev/starterm/pkg/sconfig"
 	"github.com/commandlinedev/starterm/pkg/service"
 	"github.com/commandlinedev/starterm/pkg/starobj"
 	"github.com/commandlinedev/starterm/pkg/tsgen/tsgenmeta"
 	"github.com/commandlinedev/starterm/pkg/userinput"
 	"github.com/commandlinedev/starterm/pkg/util/utilfn"
 	"github.com/commandlinedev/starterm/pkg/vdom"
-	"github.com/commandlinedev/starterm/pkg/wconfig"
 	"github.com/commandlinedev/starterm/pkg/web/webcmd"
 	"github.com/commandlinedev/starterm/pkg/wps"
 	"github.com/commandlinedev/starterm/pkg/wshrpc"
@@ -37,8 +37,8 @@ var ExtraTypes = []any{
 	wps.WSFileEventData{},
 	starobj.LayoutActionData{},
 	filestore.StarFile{},
-	wconfig.FullConfigType{},
-	wconfig.WatcherUpdate{},
+	sconfig.FullConfigType{},
+	sconfig.WatcherUpdate{},
 	wshutil.RpcMessage{},
 	wshrpc.WshServerCommandMeta{},
 	userinput.UserInputRequest{},

@@ -12,12 +12,12 @@ import (
 	"time"
 
 	"github.com/commandlinedev/starterm/pkg/panichandler"
+	"github.com/commandlinedev/starterm/pkg/sconfig"
 	"github.com/commandlinedev/starterm/pkg/starbase"
 	"github.com/commandlinedev/starterm/pkg/telemetry/telemetrydata"
 	"github.com/commandlinedev/starterm/pkg/util/daystr"
 	"github.com/commandlinedev/starterm/pkg/util/dbutil"
 	"github.com/commandlinedev/starterm/pkg/util/utilfn"
-	"github.com/commandlinedev/starterm/pkg/wconfig"
 	"github.com/commandlinedev/starterm/pkg/wshrpc"
 	"github.com/commandlinedev/starterm/pkg/wstore"
 	"github.com/google/uuid"
@@ -72,17 +72,17 @@ func (tdata *TelemetryData) Scan(val interface{}) error {
 }
 
 func IsTelemetryEnabled() bool {
-	settings := wconfig.GetWatcher().GetFullConfig()
+	settings := sconfig.GetWatcher().GetFullConfig()
 	return settings.Settings.TelemetryEnabled
 }
 
 func IsAutoUpdateEnabled() bool {
-	settings := wconfig.GetWatcher().GetFullConfig()
+	settings := sconfig.GetWatcher().GetFullConfig()
 	return settings.Settings.AutoUpdateEnabled
 }
 
 func AutoUpdateChannel() string {
-	settings := wconfig.GetWatcher().GetFullConfig()
+	settings := sconfig.GetWatcher().GetFullConfig()
 	return settings.Settings.AutoUpdateChannel
 }
 

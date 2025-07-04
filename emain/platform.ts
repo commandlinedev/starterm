@@ -57,7 +57,7 @@ export function checkIfRunningUnderARM64Translation(fullConfig: FullConfigType) 
             console.log("User chose to learn more");
             fireAndForget(() =>
                 shell.openExternal(
-                    "https://docs.starterm.dev/faq#why-does-star-warn-me-about-arm64-translation-when-it-launches"
+                    "https://commandlinedev.github.io/faq#why-does-star-warn-me-about-arm64-translation-when-it-launches"
                 )
             );
             throw new Error("User redirected to docsite to learn more about ARM64 translation, exiting");

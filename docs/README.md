@@ -1,6 +1,6 @@
 # Star Terminal Documentation
 
-This is the home for Star Terminal's documentation site. This README is specifically about _building_ and contributing to the docs site. If you are looking for the actual hosted docs, go here -- https://docs.starterm.dev
+This is the home for Star Terminal's documentation site. This README is specifically about _building_ and contributing to the docs site. If you are looking for the actual hosted docs, go here -- https://commandlinedev.github.io
 
 ### Installation
 

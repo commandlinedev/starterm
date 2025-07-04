@@ -43,7 +43,7 @@ To build and run Star locally, see instructions at [Building Star Terminal](./BU
 
 We are working to document all our UI components in [Storybook](https://storybook.js.org/docs) for easy reference and testing. If you would like to help us with this, we would be very grateful!
 
-Our Storybook site is hosted [docs.starterm.dev/storybook](https://docs.starterm.dev/storybook).
+Our Storybook site is hosted [commandlinedev.github.io/storybook](https://commandlinedev.github.io/storybook).
 
 ### Create a Pull Request
 

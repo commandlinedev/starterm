@@ -10,7 +10,7 @@ const config: Config = {
     favicon: "img/logo/star-logo_appicon.svg",
 
     // Set the production url of your site here
-    url: "https://docs.starterm.dev/",
+    url: "https://commandlinedev.github.io/",
     // Set the /<baseUrl>/ pathname under which your site is served
     // For GitHub pages deployment, it is often '/<projectName>/'
     baseUrl,
@@ -98,7 +98,7 @@ const config: Config = {
                     ? [
                           {
                               position: "left",
-                              href: "https://docs.starterm.dev/storybook",
+                              href: "https://commandlinedev.github.io/storybook",
                               label: "Storybook",
                           },
                           {
@@ -183,7 +183,7 @@ const config: Config = {
             tagName: "script",
             attributes: {
                 defer: "true",
-                "data-domain": "docs.starterm.dev",
+                "data-domain": "commandlinedev.github.io",
                 src: "https://plausible.io/js/script.file-downloads.outbound-links.tagged-events.js",
             },
         },

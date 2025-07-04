@@ -407,19 +407,24 @@ class RpcApiType {
         return client.wshRpcCall("setview", data, opts);
     }
 
+    // command "starinfo" [call]
+    StarInfoCommand(client: WshClient, opts?: RpcOpts): Promise<StarInfoData> {
+        return client.wshRpcCall("starinfo", null, opts);
+    }
+
     // command "streamcpudata" [responsestream]
 	StreamCpuDataCommand(client: WshClient, data: CpuDataRequest, opts?: RpcOpts): AsyncGenerator<TimeSeriesData, void, boolean> {
         return client.wshRpcStream("streamcpudata", data, opts);
     }
 
-    // command "streamtest" [responsestream]
-	StreamTestCommand(client: WshClient, opts?: RpcOpts): AsyncGenerator<number, void, boolean> {
-        return client.wshRpcStream("streamtest", null, opts);
-    }
-
     // command "streamstarai" [responsestream]
 	StreamStarAiCommand(client: WshClient, data: StarAIStreamRequest, opts?: RpcOpts): AsyncGenerator<StarAIPacketType, void, boolean> {
         return client.wshRpcStream("streamstarai", data, opts);
+    }
+
+    // command "streamtest" [responsestream]
+	StreamTestCommand(client: WshClient, opts?: RpcOpts): AsyncGenerator<number, void, boolean> {
+        return client.wshRpcStream("streamtest", null, opts);
     }
 
     // command "test" [call]
@@ -450,11 +455,6 @@ class RpcApiType {
     // command "waitforroute" [call]
     WaitForRouteCommand(client: WshClient, data: CommandWaitForRouteData, opts?: RpcOpts): Promise<boolean> {
         return client.wshRpcCall("waitforroute", data, opts);
-    }
-
-    // command "starinfo" [call]
-    StarInfoCommand(client: WshClient, opts?: RpcOpts): Promise<StarInfoData> {
-        return client.wshRpcCall("starinfo", null, opts);
     }
 
     // command "webselector" [call]

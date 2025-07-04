@@ -1,7 +1,7 @@
 // Copyright 2025, Command Line Inc.
 // SPDX-License-Identifier: Apache-2.0
 
-package wcore
+package score
 
 import (
 	"context"
@@ -10,11 +10,11 @@ import (
 	"time"
 
 	"github.com/commandlinedev/starterm/pkg/eventbus"
+	"github.com/commandlinedev/starterm/pkg/sconfig"
 	"github.com/commandlinedev/starterm/pkg/starobj"
 	"github.com/commandlinedev/starterm/pkg/telemetry"
 	"github.com/commandlinedev/starterm/pkg/telemetry/telemetrydata"
 	"github.com/commandlinedev/starterm/pkg/util/utilfn"
-	"github.com/commandlinedev/starterm/pkg/wconfig"
 	"github.com/commandlinedev/starterm/pkg/wps"
 	"github.com/commandlinedev/starterm/pkg/wshrpc"
 	"github.com/commandlinedev/starterm/pkg/wstore"
@@ -191,7 +191,7 @@ func GetWorkspace(ctx context.Context, wsID string) (*starobj.Workspace, error) 
 }
 
 func getTabPresetMeta() (starobj.MetaMapType, error) {
-	settings := wconfig.GetWatcher().GetFullConfig()
+	settings := sconfig.GetWatcher().GetFullConfig()
 	tabPreset := settings.Settings.TabPreset
 	if tabPreset == "" {
 		return nil, nil

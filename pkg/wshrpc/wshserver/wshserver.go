@@ -26,6 +26,8 @@ import (
 	"github.com/commandlinedev/starterm/pkg/remote/awsconn"
 	"github.com/commandlinedev/starterm/pkg/remote/conncontroller"
 	"github.com/commandlinedev/starterm/pkg/remote/fileshare"
+	"github.com/commandlinedev/starterm/pkg/sconfig"
+	"github.com/commandlinedev/starterm/pkg/score"
 	"github.com/commandlinedev/starterm/pkg/starai"
 	"github.com/commandlinedev/starterm/pkg/starbase"
 	"github.com/commandlinedev/starterm/pkg/starobj"
@@ -39,8 +41,6 @@ import (
 	"github.com/commandlinedev/starterm/pkg/util/starfileutil"
 	"github.com/commandlinedev/starterm/pkg/util/utilfn"
 	"github.com/commandlinedev/starterm/pkg/wcloud"
-	"github.com/commandlinedev/starterm/pkg/wconfig"
-	"github.com/commandlinedev/starterm/pkg/wcore"
 	"github.com/commandlinedev/starterm/pkg/wps"
 	"github.com/commandlinedev/starterm/pkg/wshrpc"
 	"github.com/commandlinedev/starterm/pkg/wshutil"
@@ -206,7 +206,7 @@ func (ws *WshServer) ResolveIdsCommand(ctx context.Context, data wshrpc.CommandR
 func (ws *WshServer) CreateBlockCommand(ctx context.Context, data wshrpc.CommandCreateBlockData) (*starobj.ORef, error) {
 	ctx = starobj.ContextWithUpdates(ctx)
 	tabId := data.TabId
-	blockData, err := wcore.CreateBlock(ctx, tabId, data.BlockDef, data.RtOpts)
+	blockData, err := score.CreateBlock(ctx, tabId, data.BlockDef, data.RtOpts)
 	if err != nil {
 		return nil, fmt.Errorf("error creating block: %w", err)
 	}
@@ -215,39 +215,39 @@ func (ws *WshServer) CreateBlockCommand(ctx context.Context, data wshrpc.Command
 		switch data.TargetAction {
 		case "replace":
 			layoutAction = &starobj.LayoutActionData{
-				ActionType:    wcore.LayoutActionDataType_Replace,
+				ActionType:    score.LayoutActionDataType_Replace,
 				TargetBlockId: data.TargetBlockId,
 				BlockId:       blockData.OID,
 				Focused:       true,
 			}
-			err = wcore.DeleteBlock(ctx, data.TargetBlockId, false)
+			err = score.DeleteBlock(ctx, data.TargetBlockId, false)
 			if err != nil {
 				return nil, fmt.Errorf("error deleting block (trying to do block replace): %w", err)
 			}
 		case "splitright":
 			layoutAction = &starobj.LayoutActionData{
-				ActionType:    wcore.LayoutActionDataType_SplitHorizontal,
+				ActionType:    score.LayoutActionDataType_SplitHorizontal,
 				BlockId:       blockData.OID,
 				TargetBlockId: data.TargetBlockId,
 				Position:      "after",
 			}
 		case "splitleft":
 			layoutAction = &starobj.LayoutActionData{
-				ActionType:    wcore.LayoutActionDataType_SplitHorizontal,
+				ActionType:    score.LayoutActionDataType_SplitHorizontal,
 				BlockId:       blockData.OID,
 				TargetBlockId: data.TargetBlockId,
 				Position:      "before",
 			}
 		case "splitup":
 			layoutAction = &starobj.LayoutActionData{
-				ActionType:    wcore.LayoutActionDataType_SplitVertical,
+				ActionType:    score.LayoutActionDataType_SplitVertical,
 				BlockId:       blockData.OID,
 				TargetBlockId: data.TargetBlockId,
 				Position:      "before",
 			}
 		case "splitdown":
 			layoutAction = &starobj.LayoutActionData{
-				ActionType:    wcore.LayoutActionDataType_SplitVertical,
+				ActionType:    score.LayoutActionDataType_SplitVertical,
 				BlockId:       blockData.OID,
 				TargetBlockId: data.TargetBlockId,
 				Position:      "after",
@@ -257,14 +257,14 @@ func (ws *WshServer) CreateBlockCommand(ctx context.Context, data wshrpc.Command
 		}
 	} else {
 		layoutAction = &starobj.LayoutActionData{
-			ActionType: wcore.LayoutActionDataType_Insert,
+			ActionType: score.LayoutActionDataType_Insert,
 			BlockId:    blockData.OID,
 			Magnified:  data.Magnified,
 			Ephemeral:  data.Ephemeral,
 			Focused:    true,
 		}
 	}
-	err = wcore.QueueLayoutActionForTab(ctx, tabId, *layoutAction)
+	err = score.QueueLayoutActionForTab(ctx, tabId, *layoutAction)
 	if err != nil {
 		return nil, fmt.Errorf("error queuing layout action: %w", err)
 	}
@@ -275,7 +275,7 @@ func (ws *WshServer) CreateBlockCommand(ctx context.Context, data wshrpc.Command
 
 func (ws *WshServer) CreateSubBlockCommand(ctx context.Context, data wshrpc.CommandCreateSubBlockData) (*starobj.ORef, error) {
 	parentBlockId := data.ParentBlockId
-	blockData, err := wcore.CreateSubBlock(ctx, parentBlockId, data.BlockDef)
+	blockData, err := score.CreateSubBlock(ctx, parentBlockId, data.BlockDef)
 	if err != nil {
 		return nil, fmt.Errorf("error creating block: %w", err)
 	}
@@ -445,7 +445,7 @@ func (ws *WshServer) FileShareCapabilityCommand(ctx context.Context, path string
 }
 
 func (ws *WshServer) DeleteSubBlockCommand(ctx context.Context, data wshrpc.CommandDeleteBlockData) error {
-	err := wcore.DeleteBlock(ctx, data.BlockId, false)
+	err := score.DeleteBlock(ctx, data.BlockId, false)
 	if err != nil {
 		return fmt.Errorf("error deleting block: %w", err)
 	}
@@ -461,12 +461,12 @@ func (ws *WshServer) DeleteBlockCommand(ctx context.Context, data wshrpc.Command
 	if tabId == "" {
 		return fmt.Errorf("no tab found for block")
 	}
-	err = wcore.DeleteBlock(ctx, data.BlockId, true)
+	err = score.DeleteBlock(ctx, data.BlockId, true)
 	if err != nil {
 		return fmt.Errorf("error deleting block: %w", err)
 	}
-	wcore.QueueLayoutActionForTab(ctx, tabId, starobj.LayoutActionData{
-		ActionType: wcore.LayoutActionDataType_Remove,
+	score.QueueLayoutActionForTab(ctx, tabId, starobj.LayoutActionData{
+		ActionType: score.LayoutActionDataType_Remove,
 		BlockId:    data.BlockId,
 	})
 	updates := starobj.ContextGetUpdatesRtn(ctx)
@@ -531,16 +531,16 @@ func (ws *WshServer) EventReadHistoryCommand(ctx context.Context, data wshrpc.Co
 
 func (ws *WshServer) SetConfigCommand(ctx context.Context, data wshrpc.MetaSettingsType) error {
 	log.Printf("SETCONFIG: %v\n", data)
-	return wconfig.SetBaseConfigValue(data.MetaMapType)
+	return sconfig.SetBaseConfigValue(data.MetaMapType)
 }
 
 func (ws *WshServer) SetConnectionsConfigCommand(ctx context.Context, data wshrpc.ConnConfigRequest) error {
 	log.Printf("SET CONNECTIONS CONFIG: %v\n", data)
-	return wconfig.SetConnectionsConfigValue(data.Host, data.MetaMapType)
+	return sconfig.SetConnectionsConfigValue(data.Host, data.MetaMapType)
 }
 
-func (ws *WshServer) GetFullConfigCommand(ctx context.Context) (wconfig.FullConfigType, error) {
-	watcher := wconfig.GetWatcher()
+func (ws *WshServer) GetFullConfigCommand(ctx context.Context) (sconfig.FullConfigType, error) {
+	watcher := sconfig.GetWatcher()
 	return watcher.GetFullConfig(), nil
 }
 
@@ -814,13 +814,13 @@ func (ws *WshServer) StarInfoCommand(ctx context.Context) (*wshrpc.StarInfoData,
 }
 
 func (ws *WshServer) WorkspaceListCommand(ctx context.Context) ([]wshrpc.WorkspaceInfoData, error) {
-	workspaceList, err := wcore.ListWorkspaces(ctx)
+	workspaceList, err := score.ListWorkspaces(ctx)
 	if err != nil {
 		return nil, fmt.Errorf("error listing workspaces: %w", err)
 	}
 	var rtn []wshrpc.WorkspaceInfoData
 	for _, workspaceEntry := range workspaceList {
-		workspaceData, err := wcore.GetWorkspace(ctx, workspaceEntry.WorkspaceId)
+		workspaceData, err := score.GetWorkspace(ctx, workspaceEntry.WorkspaceId)
 		if err != nil {
 			return nil, fmt.Errorf("error getting workspace: %w", err)
 		}

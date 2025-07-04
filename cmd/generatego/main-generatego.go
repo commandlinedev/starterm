@@ -10,15 +10,15 @@ import (
 	"strings"
 
 	"github.com/commandlinedev/starterm/pkg/gogen"
+	"github.com/commandlinedev/starterm/pkg/sconfig"
 	"github.com/commandlinedev/starterm/pkg/starobj"
 	"github.com/commandlinedev/starterm/pkg/util/utilfn"
-	"github.com/commandlinedev/starterm/pkg/wconfig"
 	"github.com/commandlinedev/starterm/pkg/wshrpc"
 )
 
 const WshClientFileName = "pkg/wshrpc/wshclient/wshclient.go"
 const StarObjMetaConstsFileName = "pkg/starobj/metaconsts.go"
-const SettingsMetaConstsFileName = "pkg/wconfig/metaconsts.go"
+const SettingsMetaConstsFileName = "pkg/sconfig/metaconsts.go"
 
 func GenerateWshClient() error {
 	fmt.Fprintf(os.Stderr, "generating wshclient file to %s\n", WshClientFileName)
@@ -27,7 +27,7 @@ func GenerateWshClient() error {
 		"github.com/commandlinedev/starterm/pkg/telemetry/telemetrydata",
 		"github.com/commandlinedev/starterm/pkg/wshutil",
 		"github.com/commandlinedev/starterm/pkg/wshrpc",
-		"github.com/commandlinedev/starterm/pkg/wconfig",
+		"github.com/commandlinedev/starterm/pkg/sconfig",
 		"github.com/commandlinedev/starterm/pkg/starobj",
 		"github.com/commandlinedev/starterm/pkg/wps",
 		"github.com/commandlinedev/starterm/pkg/vdom",
@@ -68,8 +68,8 @@ func GenerateStarObjMetaConsts() error {
 func GenerateSettingsMetaConsts() error {
 	fmt.Fprintf(os.Stderr, "generating settings meta consts file to %s\n", SettingsMetaConstsFileName)
 	var buf strings.Builder
-	gogen.GenerateBoilerplate(&buf, "wconfig", []string{})
-	gogen.GenerateMetaMapConsts(&buf, "ConfigKey_", reflect.TypeOf(wconfig.SettingsType{}), false)
+	gogen.GenerateBoilerplate(&buf, "sconfig", []string{})
+	gogen.GenerateMetaMapConsts(&buf, "ConfigKey_", reflect.TypeOf(sconfig.SettingsType{}), false)
 	buf.WriteString("\n")
 	written, err := utilfn.WriteFileIfDifferent(SettingsMetaConstsFileName, []byte(buf.String()))
 	if !written {

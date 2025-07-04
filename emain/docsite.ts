@@ -5,7 +5,7 @@ import { ipcMain } from "electron";
 import { getWebServerEndpoint } from "../frontend/util/endpoints";
 import { fetch } from "../frontend/util/fetchutil";
 
-const docsiteWebUrl = "https://docs.starterm.dev/";
+const docsiteWebUrl = "https://commandlinedev.github.io/";
 let docsiteUrl: string;
 
 ipcMain.on("get-docsite-url", (event) => {
