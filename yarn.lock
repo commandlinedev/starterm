@@ -239,7 +239,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/core@npm:^7.18.9, @babel/core@npm:^7.21.3, @babel/core@npm:^7.23.9, @babel/core@npm:^7.24.7, @babel/core@npm:^7.25.9":
+"@babel/core@npm:^7.18.9, @babel/core@npm:^7.21.3, @babel/core@npm:^7.23.9, @babel/core@npm:^7.25.9, @babel/core@npm:^7.26.10":
   version: 7.28.0
   resolution: "@babel/core@npm:7.28.0"
   dependencies:
@@ -622,7 +622,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@babel/plugin-transform-arrow-functions@npm:^7.24.7, @babel/plugin-transform-arrow-functions@npm:^7.27.1":
+"@babel/plugin-transform-arrow-functions@npm:^7.25.9, @babel/plugin-transform-arrow-functions@npm:^7.27.1":
   version: 7.27.1
   resolution: "@babel/plugin-transform-arrow-functions@npm:7.27.1"
   dependencies:
@@ -6035,15 +6035,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/node@npm:^20.9.0":
-  version: 20.19.4
-  resolution: "@types/node@npm:20.19.4"
-  dependencies:
-    undici-types: "npm:~6.21.0"
-  checksum: 10c0/53f40c963d1804d2e87ad942636fee4be0e1ca88f2173b2a52b198797747bfb55d9ba6613cd918a0c5083a03b87d58688497c7ea58a8f3108fc86a5d627528e1
-  languageName: node
-  linkType: hard
-
 "@types/node@npm:^22.0.0, @types/node@npm:^22.13.4, @types/node@npm:^22.7.7":
   version: 22.16.0
   resolution: "@types/node@npm:22.16.0"
@@ -9986,29 +9977,29 @@ __metadata:
   languageName: node
   linkType: hard
 
-"electron-vite@npm:^2.3.0":
-  version: 2.3.0
-  resolution: "electron-vite@npm:2.3.0"
+"electron-vite@npm:^3.1.0":
+  version: 3.1.0
+  resolution: "electron-vite@npm:3.1.0"
   dependencies:
-    "@babel/core": "npm:^7.24.7"
-    "@babel/plugin-transform-arrow-functions": "npm:^7.24.7"
+    "@babel/core": "npm:^7.26.10"
+    "@babel/plugin-transform-arrow-functions": "npm:^7.25.9"
     cac: "npm:^6.7.14"
-    esbuild: "npm:^0.21.5"
-    magic-string: "npm:^0.30.10"
-    picocolors: "npm:^1.0.1"
+    esbuild: "npm:^0.25.1"
+    magic-string: "npm:^0.30.17"
+    picocolors: "npm:^1.1.1"
   peerDependencies:
     "@swc/core": ^1.0.0
-    vite: ^4.0.0 || ^5.0.0
+    vite: ^4.0.0 || ^5.0.0 || ^6.0.0
   peerDependenciesMeta:
     "@swc/core":
       optional: true
   bin:
     electron-vite: bin/electron-vite.js
-  checksum: 10c0/7a8e4358a9b2053bd90c530f001b28837044ced7b8579bedb6002eb2be94d206d986d7f177da9ff93d805facf60e78d1e487ed88b097e4a6afab06f33afef6ac
+  checksum: 10c0/c5efacf83c869a933d7da390b3312beb47c145339e630f9d3ebbedbe3301ec2b070e4d05668dad28088284bad25c8044736b2339a341b1d89242a4489b0807c8
   languageName: node
   linkType: hard
 
-"electron@npm:*":
+"electron@npm:*, electron@npm:37.2.0":
   version: 37.2.0
   resolution: "electron@npm:37.2.0"
   dependencies:
@@ -10018,19 +10009,6 @@ __metadata:
   bin:
     electron: cli.js
   checksum: 10c0/1c300f1fc41e683119f37d81ba874d12c867bf607a8c2fabbcb14dfa04b83ca81094f6f5119825441ed5eabab2a9cbed1e37102c528d6ec90b2cc55d6819e990
-  languageName: node
-  linkType: hard
-
-"electron@npm:34.5.4":
-  version: 34.5.4
-  resolution: "electron@npm:34.5.4"
-  dependencies:
-    "@electron/get": "npm:^2.0.0"
-    "@types/node": "npm:^20.9.0"
-    extract-zip: "npm:^2.0.1"
-  bin:
-    electron: cli.js
-  checksum: 10c0/e232e1295c5c77e26caa07e836509d63aeb3dd1a4c0135a47e67683a145e2684aa34cbdf30c864938f10b4377bbe1babf853b986ef83b3321bac89c50c203585
   languageName: node
   linkType: hard
 
@@ -10260,7 +10238,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"esbuild@npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0, esbuild@npm:^0.25, esbuild@npm:^0.25.0, esbuild@npm:~0.25.0":
+"esbuild@npm:^0.18.0 || ^0.19.0 || ^0.20.0 || ^0.21.0 || ^0.22.0 || ^0.23.0 || ^0.24.0 || ^0.25.0, esbuild@npm:^0.25.0, esbuild@npm:^0.25.1, esbuild@npm:~0.25.0":
   version: 0.25.5
   resolution: "esbuild@npm:0.25.5"
   dependencies:
@@ -13570,7 +13548,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"magic-string@npm:^0.30.0, magic-string@npm:^0.30.10, magic-string@npm:^0.30.17":
+"magic-string@npm:^0.30.0, magic-string@npm:^0.30.17":
   version: 0.30.17
   resolution: "magic-string@npm:0.30.17"
   dependencies:
@@ -15798,7 +15776,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"picocolors@npm:^1.0.0, picocolors@npm:^1.0.1, picocolors@npm:^1.1.1":
+"picocolors@npm:^1.0.0, picocolors@npm:^1.1.1":
   version: 1.1.1
   resolution: "picocolors@npm:1.1.1"
   checksum: 10c0/e2e3e8170ab9d7c7421969adaa7e1b31434f789afb9b3f115f6b96d91945041ac3ceb02e9ec6fe6510ff036bcc0bf91e69a1772edc0b707e12b19c0f2d6bcf58
@@ -19504,10 +19482,10 @@ __metadata:
     css-tree: "npm:^3.1.0"
     dayjs: "npm:^1.11.13"
     debug: "npm:^4.4.0"
-    electron: "npm:34.5.4"
+    electron: "npm:37.2.0"
     electron-builder: "npm:^26.0"
     electron-updater: "npm:^6.6"
-    electron-vite: "npm:^2.3.0"
+    electron-vite: "npm:^3.1.0"
     env-paths: "npm:^3.0.0"
     eslint: "npm:^9.20.1"
     eslint-config-prettier: "npm:^10.0.1"
