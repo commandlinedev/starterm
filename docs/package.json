@@ -36,9 +36,9 @@
         "sass": "^1.84.0"
     },
     "devDependencies": {
-        "@docusaurus/module-type-aliases": "3.7.0",
-        "@docusaurus/tsconfig": "3.7.0",
-        "@docusaurus/types": "3.7.0",
+        "@docusaurus/module-type-aliases": "3.8.1",
+        "@docusaurus/tsconfig": "3.8.1",
+        "@docusaurus/types": "3.8.1",
         "@eslint/js": "^9.20.0",
         "@mdx-js/typescript-plugin": "^0.0.8",
         "@types/eslint": "^9.6.1",
